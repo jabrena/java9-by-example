@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Java 9 // A review of the features includes</title>
+
+    <meta name="description" content="A web presentation about STREAM API">
+    <meta name="author" content="Juan Antonio Breña Moral">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="./Styles/reveal.css">
+    <link rel="stylesheet" href="./Styles/black.css" id="theme">
+    <link rel="stylesheet" href="./Styles/zenburn.css">
+</head>
+<body>
+    <div class="reveal">
+
+        <div class="slides">
+            <section data-background="./Images/java92.jpg">
+                <h1 style="color:red">Java 9</h1>
+                <h3>A review of <a href="http://openjdk.java.net/projects/jdk9/spec/" target="_blank">JSR (379)</a></h3>
+                <i>Juan Antonio Breña Moral</i><br />
+                <i>Víctor Herraiz Posada</i>
+            </section>
+
+            <section>
+                <h2>Agenda</h2>
+                <ol>
+                    <li>Introduction</li>
+                    <li>Java Platform Module System (JSR 376)</li>
+                    <li>JEP 222: jshell: The Java Shell (Read-Eval-Print Loop)</li>
+                    <li>JEP 110: HTTP/2 Client (Incubator)</li>
+                    <li>JEP 226: UTF-8 Property Resource Bundles</li>
+                    <li>JEP 248: Make G1 the Default Garbage Collector</li>
+                </ol>
+            </section>
+            <section>
+                <h2>Introduction</h2>
+                <a href="http://openjdk.java.net/projects/jdk9/" target="_blank">http://openjdk.java.net/projects/jdk9/</a>
+                <a href="http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html" target="_blank">http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html</a>
+            </section>
+            <section>
+                <section>
+                    <h2>Java Platform Module System (JSR 376)</h2>
+                    <a href="http://openjdk.java.net/jeps/200">http://openjdk.java.net/jeps/200</a>
+                    <a href="http://openjdk.java.net/projects/jigsaw/spec/">http://openjdk.java.net/projects/jigsaw/spec/</a>
+                    http://openjdk.java.net/jeps/261
+                    http://openjdk.java.net/jeps/282
+                    http://openjdk.java.net/jeps/220
+                    http://openjdk.java.net/jeps/201
+                    http://openjdk.java.net/jeps/162
+                    http://openjdk.java.net/jeps/275
+                    http://openjdk.java.net/jeps/260
+                    http://openjdk.java.net/jeps/161
+                </section>
+                <section>
+                    <img src="Images/java8_compactProfiles.jpg" width="55%" />
+                </section>
+            </section>
+            <!--
+            <section data-background="./Images/cat.gif">
+
+                <section>
+                    <h2>Example1.java</h2>
+                    <pre><code class="hljava" data-trim contenteditable>
+import java.util.Arrays;
+import java.util.List;
+
+public class Example1 {
+    public static void main(String[] args) {
+        List&lt;String&gt; myFirstStream
+            = Arrays.asList("a1", "a2", "b1", "c2", "c1");
+        myFirstStream.stream()
+            .filter(s -> s.startsWith("c"))
+            .map(String::toUpperCase)
+            .sorted()
+            .forEach(System.out::println);
+    }
+}
+                    </code></pre>
+                </section>
+
+            </section>
+-->
+
+            <section>
+                <h2>Thanks</h2>
+            </section>
+            <section>
+                <p>
+                    <img data-src="Images/Duke3DprogressionLarge.png">
+                </p>
+            </section>
+            
+        </div>
+
+    </div>
+
+    <script src="./Scripts/head.js"></script>
+    <script src="./Scripts/reveal.js"></script>
+    <script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: './Scripts/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './Scripts/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './Scripts/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+	</script>
+</body>
+</html>
