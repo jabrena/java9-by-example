@@ -28,26 +28,88 @@
                 <i>Víctor Herraiz Posada</i>
             </section>
 
-            <section data-background="./Images/space.gif">
-                <h2>Agenda</h2>
+            <section
+                    data-background="./Images/g1.png"
+                    data-background-repeat="repeat"
+                    data-background-size="300px"
+                    style="color:black">
+                <h2 style="color:black">Agenda</h2>
                 <ol>
-                    <li>Introduction</li>
-                    <li>Java Platform Module System (JSR 376)</li>
-                    <li>JEP 143: Improve Contended Locking</li>
-                    <li>JEP 266: More Concurrency Updates</li>
-                    <li>JEP 193: Variable Handles</li>
-                    <li>JEP 222: jshell: The Java Shell</li>
-                    <li>JEP 248: G1 the Default Garbage Collector</li>
-                    <li>JEP 110: HTTP/2 Client</li>
-                    <li>JEP 226: UTF-8 Property Resource Bundles</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">000.</span> Introduction</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">001.</span> Java Platform Module System</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">010.</span> Concurrency Updates</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">011.</span> The Java Shell</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">100.</span> G1, the Garbage Collector</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">101.</span> Others</li>
                 </ol>
             </section>
             <section>
-                <h2>Introduction</h2>
-                <a href="http://openjdk.java.net/projects/jdk9/" target="_blank">http://openjdk.java.net/projects/jdk9/</a>
-                <a href="http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html" target="_blank">http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html</a>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                    How many days to release Java 9?
+                    </p>
+                    <p>
+                        <a href="http://www.java9countdown.xyz/" target="_blank">http://www.java9countdown.xyz/</a>
+                    </p>
+                    <p>
+                        Do you know the list of features included?
+                    </p>
+                    <p>
+                        <a href="http://openjdk.java.net/projects/jdk9/" target="_blank">http://openjdk.java.net/projects/jdk9/</a>
+                    </p>
+                 </section>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                        <strong>JDK Enhancement Proposal (JEP):</strong>
+                        is a process for collecting proposals for enhancements to the Java Development Kit and OpenJDK.
+                    </p>
+                    <p>
+                        <a href="https://en.m.wikipedia.org/wiki/JDK_Enhancement_Proposal" target="_blank">https://en.m.wikipedia.org/wiki/JDK_Enhancement_Proposal</a>
+                    </p>
+                    <p>
+                        <strong>Java Specification Requests (JSR):</strong>
+                        are the actual descriptions of proposed and final specifications for the Java platform.
+                    </p>
+                    <p>
+                        <a href="https://jcp.org/en/jsr/overview" target="_blank">https://jcp.org/en/jsr/overview</a>
+                    </p>
+                </section>
+                <section data-background="./Images/java9_categories.png">
+
+                </section>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                        Java 9 features explained in the talk:
+                    </p>
+                    <ol>
+                        <li>JSR 376: Java Platform Module System</li>
+                        <li>JEP 266: More Concurrency Updates</li>
+                        <li>JEP 222: Jshell: The Java Shell</li>
+                        <li>JEP 248: G1 the Default Garbage Collector</li>
+                        <li>JEP 110: HTTP/2 Client</li>
+                        <li>JEP 226: UTF-8 Property Resource Bundles</li>
+                    </ol>
+
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>JSR 376: Java Platform Module System</h2>
+                    <ol>
+                        <li>Why we need a Module system?</li>
+                        <li>API Reorganization</li>
+                        <li>How to create a Module?</li>
+                        <li>Build systems</li>
+                    </ol>
+                </section>
             </section>
             <!--
+
+                            <a href="http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html" target="_blank">http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html</a>
+
             <section>
                 <section>
                     <h2>Java Platform Module System (JSR 376)</h2>
@@ -61,6 +123,7 @@
                     http://openjdk.java.net/jeps/275
                     http://openjdk.java.net/jeps/260
                     http://openjdk.java.net/jeps/161
+                    http://openjdk.java.net/jeps/238
                 </section>
                 <section>
                     <img src="Images/java8_compactProfiles.jpg" width="55%" />
