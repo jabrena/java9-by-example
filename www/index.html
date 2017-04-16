@@ -110,7 +110,21 @@
                     </ol>
                 </section>
                 <section>
-                    <h2>JSR 376: Java Platform Module System</h2>
+                    <h3>Why we need a Module system?</h3>
+                    <p>
+                        Software can be seen as a system of interacting parts and in Java it is common to package each of those parts in its own JAR.
+                        Conceptually a part consists of three properties: a name, a public API for the rest of the world to use, and dependencies on other parts.
+                        This graph-like model helps developers and tools dissect, analyse, and work with software systems.
+                    </p>
+                </section>
+                <section>
+                    <h3>Why we need a Module system?</h3>
+                    <p>
+                        <strong>JVM Classloader:</strong>
+                    </p>
+                    <img src="./Images/jvm_classloader.png" />
+                </section>
+                <section>
                     <h3>Open issues</h3>
                     <p>
                         <a href="http://openjdk.java.net/projects/jigsaw/spec/issues/" target="_blank">Open Issues</a>
