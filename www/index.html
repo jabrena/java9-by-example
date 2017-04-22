@@ -6,7 +6,7 @@
     <title>Java 9 // A review of the features includes</title>
 
     <meta name="description" content="A web presentation about STREAM API">
-    <meta name="author" content="Juan Antonio Breña Moral">
+    <meta name="author" content="Juan Antonio Breña Moral | Víctor Herraiz Posada | Juan Antonio Medina">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -25,7 +25,8 @@
                 <h1 style="color:red">Java 9</h1>
                 <h3>A review of <a href="http://openjdk.java.net/projects/jdk9/spec/" target="_blank">JSR (379)</a></h3>
                 <i>Juan Antonio Breña Moral</i><br />
-                <i>Víctor Herraiz Posada</i>
+                <i>Víctor Herraiz Posada</i><br />
+                <i>Juan Antonio Medina</i>
             </section>
 
             <section
@@ -160,6 +161,29 @@
                 </section>
             </section>
 
+
+-->
+            <section data-background="#ffffff">
+                <h2>Concurrency updates</h2>
+                <img src="Images/java_Concurrency.gif" />
+            </section>
+            <section data-background="Images/jshell_help.jpg">
+                <h2>JShell</h2>
+            </section>
+            <section>
+                <section data-background="#ffffff">
+                    <h2>G1</h2>
+                    <img src="Images/java_memory.png" />
+                </section>
+                <section data-background="red">
+                    <h2>G1</h2>
+                    <p>G1 Detail, Slide 2</p>
+                </section>
+                <section>
+                    <h2>G1</h2>
+                    <p>G1 Detail, Slide 3</p>
+                </section>
+            </section>
             <section data-background="./Images/cat.gif">
 
                 <section>
@@ -169,32 +193,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Example1 {
-    public static void main(String[] args) {
-        List&lt;String&gt; myFirstStream
-            = Arrays.asList("a1", "a2", "b1", "c2", "c1");
-        myFirstStream.stream()
-            .filter(s -> s.startsWith("c"))
-            .map(String::toUpperCase)
-            .sorted()
-            .forEach(System.out::println);
-    }
+public static void main(String[] args) {
+List&lt;String&gt; myFirstStream
+= Arrays.asList("a1", "a2", "b1", "c2", "c1");
+myFirstStream.stream()
+.filter(s -> s.startsWith("c"))
+.map(String::toUpperCase)
+.sorted()
+.forEach(System.out::println);
+}
 }
                     </code></pre>
                 </section>
 
             </section>
--->
-            <section data-background="#ffffff">
-                <h2>Concurrency updates</h2>
-                <img src="Images/java_Concurrency.gif" />
-            </section>
-            <section data-background="Images/jshell_help.jpg">
-                <h2>JShell</h2>
-            </section>
-            <section data-background="#ffffff">
-                <h2>G1</h2>
-                <img src="Images/java_memory.png" />
-            </section>
+
             <section data-background="#ffffff">
                 <h2>Others</h2>
                 <ol>
