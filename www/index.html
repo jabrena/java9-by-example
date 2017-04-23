@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Java 9 // A review of the features includes</title>
+
+    <meta name="description" content="A web presentation about STREAM API">
+    <meta name="author" content="Juan Antonio Breña Moral | Víctor Herraiz Posada | Juan Antonio Medina">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="./Styles/reveal.css">
+    <link rel="stylesheet" href="./Styles/black.css" id="theme">
+    <link rel="stylesheet" href="./Styles/zenburn.css">
+</head>
+<body>
+    <div class="reveal">
+
+        <div class="slides">
+            <section data-background="./Images/java92.jpg">
+                <h1 style="color:red">Java 9</h1>
+                <h3>A review of <a href="http://openjdk.java.net/projects/jdk9/spec/" target="_blank">JSR (379)</a></h3>
+                <i>Juan Antonio Breña Moral</i><br />
+                <i>Víctor Herraiz Posada</i><br />
+                <i>Juan Antonio Medina</i>
+            </section>
+
+            <section
+                    data-background="./Images/g1.png"
+                    data-background-repeat="repeat"
+                    data-background-size="300px"
+                    style="color:black">
+                <h2 style="color:black">Agenda</h2>
+                <ol>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">000.</span> Introduction</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">001.</span> Java Platform Module System</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">010.</span> Concurrency Updates</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">011.</span> The Java Shell</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">100.</span> G1</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">101.</span> Others</li>
+                </ol>
+            </section>
+            <section>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                    How many days to release Java 9?
+                    </p>
+                    <p>
+                        <a href="http://www.java9countdown.xyz/" target="_blank">http://www.java9countdown.xyz/</a>
+                    </p>
+                    <p>
+                        Do you know the list of features included?
+                    </p>
+                    <p>
+                        <a href="http://openjdk.java.net/projects/jdk9/" target="_blank">http://openjdk.java.net/projects/jdk9/</a>
+                    </p>
+                 </section>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                        <strong>JDK Enhancement Proposal (JEP):</strong>
+                        is a process for collecting proposals for enhancements to the Java Development Kit and OpenJDK.
+                    </p>
+                    <p>
+                        <a href="https://en.m.wikipedia.org/wiki/JDK_Enhancement_Proposal" target="_blank">https://en.m.wikipedia.org/wiki/JDK_Enhancement_Proposal</a>
+                    </p>
+                    <p>
+                        <strong>Java Specification Requests (JSR):</strong>
+                        are the actual descriptions of proposed and final specifications for the Java platform.
+                    </p>
+                    <p>
+                        <a href="https://jcp.org/en/jsr/overview" target="_blank">https://jcp.org/en/jsr/overview</a>
+                    </p>
+                </section>
+                <section data-background="#ffffff">
+                    <h2>Introduction</h2>
+                    <img src="Images/JVM_Architecture.png" />
+                </section>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                        Features reviewed in the talk:
+                    </p>
+                    <ol>
+                        <li>JSR 376: Java Platform Module System</li>
+                        <li>JEP 266: More Concurrency Updates</li>
+                        <li>JEP 222: Jshell: The Java Shell</li>
+                        <li>JEP 248: G1 the Default Garbage Collector</li>
+                        <li>JEP 110: HTTP/2 Client</li>
+                        <li>JEP 226: UTF-8 Property Resource Bundles</li>
+                    </ol>
+                    <p>
+                        But... Java 9 include more...
+                    </p>
+                </section>
+                <section data-background="./Images/java9_categories.png">
+
+                </section>
+
+            </section>
+            <section>
+                <section>
+                    <h2>JSR 376: Java Platform Module System</h2>
+                    <ol>
+                        <li>Why we need a Module system?</li>
+                        <li>API Reorganization</li>
+                        <li>How to create a Module?</li>
+                        <li>Build systems</li>
+                        <li>Open issues</li>
+                        <li>Conclusions</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Why we need a Module system?</h3>
+                    <p>
+                        Software can be seen as a system of interacting parts and in Java it is common to package each of those parts in its own JAR.
+                        Conceptually a part consists of three properties: a name, a public API for the rest of the world to use, and dependencies on other parts.
+                        This graph-like model helps developers and tools dissect, analyse, and work with software systems.
+                    </p>
+                </section>
+                <section>
+                    <h3>Why we need a Module system?</h3>
+                    <p>
+                        <strong>JVM Classloader:</strong>
+                    </p>
+                    <img src="./Images/jvm_classloader.png" />
+                </section>
+                <section>
+                    <h3>Open issues</h3>
+                    <p>
+                        <a href="http://openjdk.java.net/projects/jigsaw/spec/issues/" target="_blank">Open Issues</a>
+                    </p>
+                </section>
+            </section>
+            <!--
+
+                            <a href="http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html" target="_blank">http://download.java.net/java/jdk9/docs/api/index.html?overview-summary.html</a>
+
+            <section>
+                <section>
+                    <h2>Java Platform Module System (JSR 376)</h2>
+                    <a href="http://openjdk.java.net/jeps/200">http://openjdk.java.net/jeps/200</a>
+                    <a href="http://openjdk.java.net/projects/jigsaw/spec/">http://openjdk.java.net/projects/jigsaw/spec/</a>
+                    http://openjdk.java.net/jeps/261
+                    http://openjdk.java.net/jeps/282
+                    http://openjdk.java.net/jeps/220
+                    http://openjdk.java.net/jeps/201
+                    http://openjdk.java.net/jeps/162
+                    http://openjdk.java.net/jeps/275
+                    http://openjdk.java.net/jeps/260
+                    http://openjdk.java.net/jeps/161
+                    http://openjdk.java.net/jeps/238
+                </section>
+                <section>
+                    <img src="Images/java8_compactProfiles.jpg" width="55%" />
+                </section>
+            </section>
+
+
+-->
+            <section data-background="#ffffff">
+                <h2>Concurrency updates</h2>
+                <img src="Images/java_Concurrency.gif" />
+            </section>
+            <section data-background="Images/jshell_help.jpg">
+                <h2>JShell</h2>
+            </section>
+            <section>
+                <section data-background="#ffffff">
+                    <h2>G1</h2>
+                    <img src="Images/java_memory.png" />
+                </section>
+                <section data-background="red">
+                    <h2>G1</h2>
+                    <p>G1 Detail, Slide 2</p>
+                </section>
+                <section>
+                    <h2>G1</h2>
+                    <p>G1 Detail, Slide 3</p>
+                </section>
+            </section>
+            <section data-background="./Images/cat.gif">
+
+                <section>
+                    <h2>Example1.java</h2>
+                    <pre><code class="hljava" data-trim contenteditable>
+import java.util.Arrays;
+import java.util.List;
+
+public class Example1 {
+public static void main(String[] args) {
+List&lt;String&gt; myFirstStream
+= Arrays.asList("a1", "a2", "b1", "c2", "c1");
+myFirstStream.stream()
+.filter(s -> s.startsWith("c"))
+.map(String::toUpperCase)
+.sorted()
+.forEach(System.out::println);
+}
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code class="gherkin">
+Feature: Feature
+Scenario Outline: A scenario
+# A comment
+@tag @tagz
+Given I have 4 cukes in my "big" and 'Given' Given belly
+"""
+A doc string with Given
+"""
+And a table:
+| with | some |
+| rows |      |
+                    </code></pre>
+                </section>
+            </section>
+
+            <section data-background="#ffffff">
+                <h2>Others</h2>
+                <ol>
+                    <li>JEP 110: HTTP/2 Client</li>
+                    <li>JEP 226: UTF-8 Property Resource Bundles</li>
+                </ol>
+            </section>
+            <section data-background="Images/questions.jpg">
+                <h2>Thanks</h2>
+            </section>
+        </div>
+
+    </div>
+
+    <script src="./Scripts/head.js"></script>
+    <script src="./Scripts/reveal.js"></script>
+    <script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: './Scripts/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './Scripts/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './Scripts/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+	</script>
+    <script src="./Scripts/highlight.pack.js"></script>
+</body>
+</html>
