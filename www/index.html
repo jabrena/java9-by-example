@@ -212,6 +212,26 @@ module org.example @ 1.0 {
                     </code></pre>
                 </section>
                 <section>
+                    <pre><code class="hljava" data-trim contenteditable>
+
+java version "9-ea"
+time java -verbose:class --module-path ./build/libs -m demo/demo.HelloWorld
+0,42s user 0,07s system 80% cpu 0,600 total
+780 classes loaded
+
+java version "9-ea"
+time java -verbose:class -jar hello_world-0.1.0-SNAPSHOT.jar
+0,26s user 0,05s system 75% cpu 0,419 total
+594 classes loaded
+
+java version "1.8.0_121"
+time java -verbose:class -jar hello_world-0.1.0-SNAPSHOT.jar
+0,13s user 0,03s system 50% cpu 0,311 total
+480 classes loaded
+
+                    </code></pre>
+                </section>
+                <section>
                     <h3>Open issues</h3>
                     <p>
                         <a href="http://openjdk.java.net/projects/jigsaw/spec/issues/" target="_blank">Open Issues</a>
