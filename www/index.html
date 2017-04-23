@@ -194,6 +194,15 @@ Jigsaw updates some points in the JVM architecture:
                     </ul>
                 </section>
                 <section>
+                    WHY IT’S GOING TO BREAK YOUR APPS
+                    Exports are package based
+                    A non-exported package is not visible to consumers
+                    2 modules cannot export the same packages
+                    2 modules cannot have the same internal packages
+
+                    export JAVA_HOME=/Library/Java/Home
+                </section>
+                <section>
                     <pre><code class="hljava" data-trim contenteditable>
 module org.example @ 1.0 {
     requires jdk.base;
