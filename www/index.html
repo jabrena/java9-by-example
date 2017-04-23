@@ -205,7 +205,21 @@ myFirstStream.stream()
 }
                     </code></pre>
                 </section>
-
+                <section>
+                    <pre><code class="gherkin">
+Feature: Feature
+Scenario Outline: A scenario
+# A comment
+@tag @tagz
+Given I have 4 cukes in my "big" and 'Given' Given belly
+"""
+A doc string with Given
+"""
+And a table:
+| with | some |
+| rows |      |
+                    </code></pre>
+                </section>
             </section>
 
             <section data-background="#ffffff">
@@ -243,7 +257,7 @@ myFirstStream.stream()
 					{ src: './Scripts/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-
 	</script>
+    <script src="./Scripts/highlight.pack.js"></script>
 </body>
 </html>
