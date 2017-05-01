@@ -42,6 +42,7 @@ task compile(type: Exec) {
                 commandLine += it
             }
         }
+        //commandLine += " --module-path /Users/jabrena/Documents/DATA/java9-by-example/demo/build/libs"
     }
 }
 

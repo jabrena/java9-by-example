@@ -47,6 +47,7 @@ task compile(type: Exec) {
                 commandLine += it
             }
         }
+        //commandLine += "--module-path demo"
     }
 }
 
