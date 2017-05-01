@@ -161,6 +161,13 @@ Jigsaw updates some points in the JVM architecture:
                     <img src="./Images/jvm_classloader.png" />
                 </section>
                 <section>
+                    <h3>Why we need a Module system?</h3>
+                    <p>
+                        <strong>JVM Classloader:</strong>
+                    </p>
+                    <img src="./Images/salad_bowl.jpg" width="40%" />
+                </section>
+                <section>
                     <h3>JEP 161: Compact Profiles</h3>
                     <img src="./Images/java8_compactProfiles.jpg" width="50%" />
                 </section>
@@ -193,22 +200,22 @@ Jigsaw updates some points in the JVM architecture:
                         </ul>
                     </ul>
                 </section>
-                <section>
-                    WHY IT’S GOING TO BREAK YOUR APPS
-                    Exports are package based
-                    A non-exported package is not visible to consumers
-                    2 modules cannot export the same packages
-                    2 modules cannot have the same internal packages
 
-                    export JAVA_HOME=/Library/Java/Home
-                </section>
                 <section>
+                    <h3>How to create a module</h3>
+                    <p>module-info.java</p>
                     <pre><code class="hljava" data-trim contenteditable>
 module org.example @ 1.0 {
     requires jdk.base;
     requires com.google.guava @ 18.0;
     exports org.example.api;
 }
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code class="hljava" data-trim contenteditable>
+export JAVA_HOME=/Library/Java/Home
+gradle init --type java-library
                     </code></pre>
                 </section>
                 <section>

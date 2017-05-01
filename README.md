@@ -15,3 +15,9 @@ Using Python, you can use the following command:
 ``` bash
 python -m SimpleHTTPServer
 ```
+
+##Create a Java project from Scratch with Gradle
+
+```
+gradle init --type java-library
+```
