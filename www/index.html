@@ -39,7 +39,7 @@
                     <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">001.</span> Java Platform Module System &nbsp;</li>
                     <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">010.</span> Concurrency Updates</li>
                     <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">011.</span> The Java Shell</li>
-                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">100.</span> G1</li>
+                    <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">100.</span> The Garbage first collector (G1) &nbsp;</li>
                     <li style="display: block; background: #808080;"><span style="display: inline-block; background: #DFFF6D; width:100px;">101.</span> Others</li>
                 </ol>
             </section>
@@ -253,17 +253,161 @@ time java -verbose:class -jar hello_world-0.1.0-SNAPSHOT.jar
                 <h2>JShell</h2>
             </section>
             <section>
-                <section data-background="#ffffff">
-                    <h2>G1</h2>
-                    <img src="Images/java_memory.png" />
+                <section data-background="white">
+                    <h2>The Garbage first collector (G1)</h2>
+                    <img src="Images/garbage-collection.png" />
                 </section>
-                <section data-background="red">
-                    <h2>G1</h2>
-                    <p>G1 Detail, Slide 2</p>
+                <section data-background="white">
+                <h2>Java Heap</h2>
+                <p>Java objects reside in an area called the heap.</p>
+                <p>Is created when the JVM starts up and may increase or decrease in size while the application runs.</p>
+                <p>When the heap becomes full, garbage is collected.</p>
+                <p>Note that the JVM uses more memory than just the heap. Java methods, thread stacks and native handles are allocated in memory separate from the heap, as well as JVM internal data structures.</p>
                 </section>
-                <section>
-                    <h2>G1</h2>
-                    <p>G1 Detail, Slide 3</p>
+                <section data-background="white">
+                    <h2>Garbage Collector</h2>
+                    <p>A garbage collector automatically handles freeing of unused object memory by reclaiming when it can prove that is no longer accessible.</p>
+                    <p>Traditionally, garbage collection has been considered an inefficient process, with modern technology performance is actually better than explicit freeing of objects.</p>
+                </section>
+                <section data-background="./Images/maxresdefault.jpg" style="color:black">
+                </section>
+                <section data-background="white">
+                    <h3>Serial Collector</h3>
+                    <p>Mainly designed for single-threaded environments and for small heaps.</p>
+                    <p>This collector freezes all application threads whenever it’s working, which disqualifies it for all intents and purposes from being used in a server environment.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Parallel collector</h3>
+                    <p>Its biggest advantage is that is uses multiple threads to scan through and compact the heap.</p>
+                    <p>The downside to the parallel collector is that it will stop application threads when performing either a minor or full GC collection.</p>
+                    <p>The parallel collector is best suited for apps that can tolerate application pauses and are trying to optimize for lower CPU overhead caused by the collector.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Concurrent-Mark-Sweep collector</h3>
+                    <p>Uses multiple threads (“concurrent”) to scan through the heap (“mark”) for unused objects that can be recycled (“sweep”).</p>
+                    <p>Uses more CPU to provide continuous throughput, by using multiple threads.</p>
+                    <p>For most long-running server applications which are adverse to application freezes, that’s usually a good trade off to make.</p>
+                </section>
+                <section data-background="white">
+                    <h3>G1 collector</h3>
+                    <p>The Garbage first collector (G1) introduced in JDK 7 designed to better support heaps larger than 4GB.</p>
+                    <p>Utilizes multiple background threads to scan through the heap divides into regions, from 1MB to 32MB (depending on heap size), the goal is to have around 2048 regions.</p>
+                    <p>G1 collector is geared towards scanning those regions that contain the most garbage objects first, giving it its name (Garbage first).</p>
+                </section>
+                <section data-background="white">
+                    <h3>G1 Basics</h3>
+                    <p>Is an incremental parallel compacting GC that provides more predictable pause times compared to CMS and Parallel.</p>
+                    <p>Introducing a parallel, concurrent and multi-phased marking cycle.</p>
+                    <p>Can work with much larger heaps while providing reasonable worst-case pause times.</p>
+                    <p>The basic idea your set your heap ranges and a realistic (soft real time) pause time goal and then let the GC do its job.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Old Heap Layout</h3>
+                    <p>Conventional GC layout a contiguous Java heap splits into (contiguous) young and old generations.</p>
+                    <img src="./Images/old_heap.jpg">
+                </section>
+                <section data-background="white">
+                    <h3>G1 Heap Layout</h3>
+                    <img src="./Images/g1_heap.jpg">
+                </section>
+                <section data-background="white">
+                    <h3>G1 Regions</h3>
+                    <p>Heap space divides into amultiple fixed-sized regions.</p>
+                    <p>As the need arises, the free regions are assigned to either the young or the old generation.</p>
+                    <p>Once a region frees up, it goes back to the "free" regions list.</p>
+                    <p>Reclaim heap as much as possible (trying to meet the pause time goal) collecting regions with the least amount of live data, the ones with most garbage.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Young Generations</h3>
+                    <p>Contains eden regions or survivor regions.</p>
+                    <p>These regions provide the same function as the respective contiguous spaces in other collectors, with the difference that are typically laid out in a noncontiguous pattern in memory.</p>
+                    <h3>Old Generations</h3>
+                    <p>Old regions make up the old generation. Old generation regions may be humongous, that is they might span multiple regions.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Allocation</h3>
+                    <p>An application always allocates into a young generation, that is, eden regions, with the exception of humongous, objects that are directly allocated as belonging to the old generation.</p>
+                    <p>G1 can reclaim space in young generations as a whole, and any additional set of old generation regions.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Copyng</h3>
+                    <p>G1 copies objects from a collection set to one or more different regions.</p>
+                    <p>The destination depends on the source:</p>
+                    <p>Entire young generation is copied into either survivor or old regions, and objects from old regions to other, different old regions using aging.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Garbage Collection Cycle</h3>
+                    <img src="./Images/collection_cycle.png">
+                    <p>Collector alternates between two phases. 'Young-only' contains garbage collections that fill up the currently available memory with objects in the old generation gradually. 'The space-reclamation' reclaims space in the old generation incrementally.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Vs Parallel</h3>
+                    <p>Parallel GC can compact and reclaim space in the old generation only as a whole.</p>
+                    <p>G1 incrementally distributes this work across multiple much shorter collections.<p>
+                    <p>This substantially shortens pause time at the potential expense of throughput.</p>
+                </section>
+                <section data-background="white">
+                    <h3>VS CMS</h3>
+                    <p>Similar to the CMS, G1 concurrently performs part of the old generation space-reclamation concurrently. However, CMS can’t defragment the old generation heap, eventually running into long Full GC's.</p>
+                    <p>G1 can reclaim some completely empty, large areas of the old generation at any collection. This could avoid many otherwise unnecessary garbage collections, freeing a significant amount of space without much effort.</p>
+                </section>
+                <section data-background="white">
+                    <h3>Tunning</h3>
+<pre><code class="bash" data-trim data-noescape>
+# The goal for the maximum pause time.
+-XX:MaxGCPauseMillis=200
+
+#The goal for the maximum pause time interval. By default G1
+#doesn’t set any goal, allowing G1 to perform garbage
+#collections back-to-back in extreme cases.
+-XX:GCPauseTimeInterval=ergo
+
+#The maximum number of threads used for parallel work during
+#garbage collection pauses. This is derived from the number
+#of available threads of the computer that the VM runs on in
+#the following way: if the number of CPU threads available to
+#the process is fewer than or equal to 8, use that.
+#Otherwise add five eighths of the threads greater than to
+#the final number of threads.
+-XX:ParallelGCThreads=ergo
+
+#The maximum number of threads used for concurrent work.
+#By default, this value is -XX:ParallelGCThreads divided by 4
+-XX:ConcGCThreads=ergo
+
+#Defaults for controlling the initiating heap occupancy
+#indicate that adaptive determination of that value is turned on,
+#and that for the first few collection cycles G1 will use an
+#occupancy of 45% of the old generation as mark start threshold.
+-XX:+G1UseAdaptiveIHOP
+-XX:InitiatingHeapOccupancyPercent=45
+
+#The set of the heap region size based on initial and maximum
+#heap size. So that heap contains roughly 2048 heap regions.
+#The size of a heap region can vary from 1 to 32 MB,
+#and must be a power of 2.
+-XX:G1HeapRegionSize=ergo
+
+#The size of the young generation in total, which varies
+#between these two values as percentages of the current Java
+#heap in use
+-XX:G1NewSizePercent=5
+-XX:G1MaxNewSizePercent=60
+
+#The allowed unreclaimed space in the collection set
+#candidates as a percentage. G1 stops the space-reclamation
+#phase if the free space in the collection set candidates is
+#lower than that.
+-XX:G1HeapWastePercent=5
+
+#The expected length of the space-reclamation phase in a
+#number of collections.
+-XX:G1MixedGCCountTarget=8
+
+#Old generation regions with higher live object occupancy
+#than this percentage aren't collected in this space-reclamation phase.</td>
+-XX:G1MixedGCLiveThresholdPercent=85
+</code></pre>
                 </section>
             </section>
             <section data-background="./Images/cat.gif">
