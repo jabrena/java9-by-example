@@ -251,7 +251,14 @@ time java -verbose:class -jar hello_world-0.1.0-SNAPSHOT.jar
                     <img src="Images/garbage-collection.png" />
                 </section>
                 <section data-background="white">
-                    <h2>Background</h2>
+                <h2>Java Heap</h2>
+                <p>Java objects reside in an area called the heap.</p>
+                <p>Is created when the JVM starts up and may increase or decrease in size while the application runs.</p>
+                <p>When the heap becomes full, garbage is collected.</p>
+                <p>Note that the JVM uses more memory than just the heap. Java methods, thread stacks and native handles are allocated in memory separate from the heap, as well as JVM internal data structures.</p>
+                </section>
+                <section data-background="white">
+                    <h2>Garbage Collector</h2>
                     <p>A garbage collector automatically handles freeing of unused object memory by reclaiming when it can prove that is no longer accessible.</p>
                     <p>Traditionally, garbage collection has been considered an inefficient process, with modern technology performance is actually better than explicit freeing of objects.</p>
                 </section>
