@@ -55,15 +55,24 @@ Feature: Review JSR 379
 
     Background: Audience with heteregeneous Java/JVM skills
 
-    Scenario: The talk begin
-        Given A listener with interest to learn about Java 9
+    Scenario: The initial talk moment
+        Given A listener with interest to learn Java 9
         Then The talker will explain the introduction:
 
 | # | Point                               |
-| 1 | JEP vs JRS                          |
+| 1 | Java Timeline                       |
 | 3 | List of features included on Java 9 |
                     </code></pre>
                 </section>
+                <section>
+                    <h3>Java timeline</h3>
+                    <p>
+                        <a href="http://www.java9countdown.xyz/" target="_blank">
+                            <img src="./Images/javaTimeLine.jpg" />
+                        </a>
+                    </p>
+                </section>
+                <!--
                 <section>
                     <h3>JEP vs JSR</h3>
                     <p>
@@ -81,14 +90,9 @@ Feature: Review JSR 379
                         <a href="https://jcp.org/en/jsr/overview" target="_blank">https://jcp.org/en/jsr/overview</a>
                     </p>
                 </section>
+                -->
                 <section>
                     <h3>Features includes with Java 9</h3>
-                    <p>
-                    How many days to release Java 9?
-                    </p>
-                    <p>
-                        <a href="http://www.java9countdown.xyz/" target="_blank">http://www.java9countdown.xyz/</a>
-                    </p>
                     <p>
                         Do you know the list of features included?
                     </p>
@@ -160,6 +164,7 @@ Jigsaw updates some points in the JVM architecture:
                     </p>
                     <img src="./Images/jvm_classloader.png" />
                 </section>
+                <!--
                 <section>
                     <h3>Why we need a Module system?</h3>
                     <p>
@@ -167,6 +172,7 @@ Jigsaw updates some points in the JVM architecture:
                     </p>
                     <img src="./Images/salad_bowl.jpg" width="40%" />
                 </section>
+                -->
                 <section>
                     <h3>JEP 161: Compact Profiles</h3>
                     <img src="./Images/java8_compactProfiles.jpg" width="50%" />
@@ -205,9 +211,10 @@ Jigsaw updates some points in the JVM architecture:
                     <h3>How to create a module</h3>
                     <p>module-info.java</p>
                     <pre><code class="hljava" data-trim contenteditable>
-module org.example @ 1.0 {
-    requires jdk.base;
-    requires com.google.guava @ 18.0;
+module org.example {
+    requires java.logging;
+    requires com.google.guava;
+
     exports org.example.api;
 }
                     </code></pre>
@@ -217,7 +224,24 @@ module org.example @ 1.0 {
 export JAVA_HOME=/Library/Java/Home
 gradle init --type java-library
                     </code></pre>
+                    <pre><code class="hljava" data-trim contenteditable>
+javac -d
+/hello_world_module/build/classes
+/hello_world_module/src/main/java/demo/HelloWorld.java
+/hello_world_module/src/main/java/module-info.java
+--module-path /demo/build/libs
+                    </code></pre>
+                    <pre><code class="hljava" data-trim contenteditable>
+java -verbose:class -jar
+     hello_world-0.1.0-SNAPSHOT.jar
+                    </code></pre>
+                    <pre><code class="hljava" data-trim contenteditable>
+java -verbose:class
+     --module-path ./build/libs
+     -m demo/demo.hw.HelloWorld
+                    </code></pre>
                 </section>
+                <!--
                 <section>
                     <pre><code class="hljava" data-trim contenteditable>
 
@@ -238,19 +262,43 @@ time java -verbose:class -jar hello_world-0.1.0-SNAPSHOT.jar
 
                     </code></pre>
                 </section>
+                -->
                 <section>
                     <h3>Open issues</h3>
                     <p>
                         <a href="http://openjdk.java.net/projects/jigsaw/spec/issues/" target="_blank">Open Issues</a>
                     </p>
                 </section>
+                <section>
+                    <h3>Conclusions</h3>
+<ul>
+    <li>Modularity a pending piece in the Java architecture</li>
+    <li>The adoption of Jigsaw will depend of Build Systems & IDEs</li>
+    <li>It is necessary to know how Spring will integrate JIGSAW</li>
+    <li>Many open projects are creating issues to modularize his libraries</li>
+</ul>
+                </section>
             </section>
             <section data-background="#ffffff">
                 <h2>Concurrency updates</h2>
                 <img src="Images/java_Concurrency.gif" />
             </section>
-            <section data-background="Images/jshell_help.jpg">
-                <h2>JShell</h2>
+            <section>
+                <section data-background="Images/jshell_help.jpg">
+                    <h2>JShell</h2>
+                </section>
+                <section>
+                    <h3>Before:</h3>
+                    <img src="Images/idea.jpg" />
+                </section>
+                <section>
+                    <h3>Examples:</h3>
+                    <a href="http://stackoverflow.com/questions/4759570/finding-number-of-cores-in-java">
+                        http://stackoverflow.com/questions/4759570/finding-number-of-cores-in-java</a>
+                    <a href="http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/">
+                        http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
+                    </a>
+                </section>
             </section>
             <section>
                 <section data-background="white">
